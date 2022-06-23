@@ -3,7 +3,7 @@ class Classroom
   attr_reader :students
 
   def initialize(label)
-    @label=label
+    @label = label
     @students = []
   end
 

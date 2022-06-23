@@ -1,12 +1,8 @@
-require './base_decorator.rb'
-require './person.rb'
+require './base_decorator'
+require './person'
 
 class CapitalizeDecorator < Decorator
   def correct_name
     @nameable.correct_name.capitalize
   end
 end
-
-person = Person.new(22, 'maximilianus')
-capitalizedPerson = CapitalizeDecorator.new(person)
-p capitalizedPerson.correct_name

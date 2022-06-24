@@ -1,6 +1,6 @@
-require './teacher.rb'
-require './student.rb'
-require './book.rb'
+require './teacher'
+require './student'
+require './book'
 require './rental'
 
 class App
@@ -14,7 +14,7 @@ class App
     if @books.empty?
       puts "There are currently no books in the library.\n"
       Main.new.options
-    else 
+    else
       @books.each_with_index { |book, idx| puts "#{idx}) Title: '#{book.title}', Author: #{book.author}" }
     end
   end
@@ -22,10 +22,11 @@ class App
   def list_people
     if @people.empty?
       puts "There are currently no registered person in the library.\n"
-    else 
+    else
       @people.each_with_index do |person, idx|
         if person.is_a?(Student)
-        puts "#{idx}) [Student] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, parent permission: #{person.parent_permission ? 'Yes' : 'No'}"
+          puts "#{idx}) [Student] ID: #{person.id}, Name: #{person.name}, Age: #{person.age},
+           parent permission: #{person.parent_permission ? 'Yes' : 'No'}"
         else
           puts "#{idx}) [Teacher] ID: #{person.id}, Name: #{person.name}, Age: #{person.age} "
         end
@@ -59,8 +60,8 @@ class App
     when 'y'
       student = Student.new(age, name)
     when 'n'
-    student = Student.new(age, name, parent_permission: false)
-    puts 'Person created successfully'
+      student = Student.new(age, name, parent_permission: false)
+      puts 'Person created successfully'
     end
     @people << student
   end
@@ -104,7 +105,11 @@ class App
       puts "There are currently no rentals in the library.\n"
       Main.new.options
     else
-      @rentals.each { |rental| puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}" if rental.person.id == input_id}
+      @rentals.each do |rental|
+        if rental.person.id == input_id
+          puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}"
+        end
+      end
     end
   end
 end

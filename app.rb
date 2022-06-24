@@ -13,8 +13,9 @@ class App
   def list_books
     if @books.empty?
       puts "There are currently no books in the library.\n"
+      Main.new.options
     else 
-      @books.each { |book| puts "Title: '#{book.title}', Author: #{book.author}" }
+      @books.each_with_index { |book, idx| puts "#{idx}) Title: '#{book.title}', Author: #{book.author}" }
     end
   end
 
@@ -22,11 +23,11 @@ class App
     if @people.empty?
       puts "There are currently no registered person in the library.\n"
     else 
-      @people.each do |person|
+      @people.each_with_index do |person, idx|
         if person.is_a?(Student)
-        puts "[Student] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, parent permission: #{person.parent_permission ? 'Yes' : 'No'}"
+        puts "#{idx}) [Student] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, parent permission: #{person.parent_permission ? 'Yes' : 'No'}"
         else
-          puts "[Teacher] ID: #{person.id}, Name: #{person.name}, Age: #{person.age} "
+          puts "#{idx}) [Teacher] ID: #{person.id}, Name: #{person.name}, Age: #{person.age} "
         end
       end
     end
@@ -78,6 +79,32 @@ class App
     print 'Author:'
     author = gets.chomp
     book = Book.new(title, author)
+    puts 'Book created successfully'
     @books << book
+  end
+
+  def creat_rental
+    puts 'select book'
+    list_books
+    index_book = gets.chomp.to_i
+    puts 'select person'
+    list_people
+    index_person = gets.chomp.to_i
+    print 'date:'
+    date = gets.chomp
+    rental = Rental.new(date, @books[index_book], @people[index_person])
+    @rentals << rental
+    puts 'Rental created successfully'
+  end
+
+  def list_rentals
+    print 'ID of person:'
+    input_id = gets.chomp.to_i
+    if @rentals.empty?
+      puts "There are currently no rentals in the library.\n"
+      Main.new.options
+    else
+      @rentals.each { |rental| puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}" if rental.person.id == input_id}
+    end
   end
 end

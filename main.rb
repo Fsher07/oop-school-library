@@ -28,6 +28,10 @@ class Main
       @action.add_person
     when 4
       @action.add_book
+    when 5
+      @action.creat_rental
+    when 6
+      @action.list_rentals
     when 7
       puts 'Thank you for using School Library App'
       exit

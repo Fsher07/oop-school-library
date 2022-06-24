@@ -1,3 +1,6 @@
+require './book.rb'
+require './person.rb'
+
 class Rental
   attr_accessor :date
   attr_reader :person, :book

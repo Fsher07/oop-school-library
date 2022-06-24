@@ -1,5 +1,5 @@
-#!/usr/bin/env ruby
 require './app'
+
 class Main
   def initialize
     @action = App.new

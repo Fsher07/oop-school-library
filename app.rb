@@ -13,7 +13,8 @@ class App
   def list_books
     if @books.empty?
       puts "There are currently no books in the library.\n"
-    else books.each { |book| puts `Title: #{book.title}, Author: #{book.author}` }
+    else 
+      @books.each { |book| puts "Title: '#{book.title}', Author: #{book.author}" }
     end
   end
 
@@ -69,5 +70,14 @@ class App
     teacher = Teacher.new(age, specialization, name)
     puts 'Person created successfully'
     @people << teacher
+  end
+
+  def add_book
+    print 'Title:'
+    title = gets.chomp
+    print 'Author:'
+    author = gets.chomp
+    book = Book.new(title, author)
+    @books << book
   end
 end

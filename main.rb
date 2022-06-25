@@ -1,4 +1,5 @@
 require './app'
+require 'pry'
 
 class Main
   def initialize
